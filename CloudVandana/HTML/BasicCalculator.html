@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BOSS</title>
+<style>
+    body{
+   
+   padding:60px;
+   display:block;
+}
+
+.banner{
+display:flex;
+justify-content:space-around;
+align-items:center;
+}
+.text-b{display:block;}
+.banner2{
+   display: block;
+   background-color: chocolate;
+   height: 450px;
+   width: 450px;
+   justify-content: center;
+   align-items: center;
+}
+.numbers{
+   background-color: lightgrey;
+   height:70px;
+   width:400px;
+   margin-left: 25px;
+   margin-bottom: 25px;
+}
+.numbers input{
+   float: right;
+   margin-right:15px;
+   height: 20px;
+   margin-top: 25px;
+   text-align: right;
+}
+.numbers-btn{
+   margin-top: 10px;
+}
+.keyboard{
+   display:flex;
+   margin-bottom: 25px;
+}
+.keyboard button{
+   display: block;
+   height: 35px;
+   width: 35px;
+   background-color: black;
+   color: #ffffff;
+   text-align: center;
+   margin-left: 60px;
+}
+.keyboard1{
+   display: flex;
+   margin-bottom: 25px;
+}
+.keyboard1 button{
+   display: block;
+   height: 35px;
+   width: 35px;
+   background-color: black;
+   color: #ffffff;
+   text-align: center;
+   margin-left: 60px;
+}
+.keyboard2{display: flex;	margin-bottom: 25px;}
+.keyboard2 button{
+   display: block;
+   height: 35px;
+   width: 35px;
+   background-color: black;
+   color: #ffffff;
+   text-align: center;
+   margin-left: 60px;
+}
+.keyboard3{ display: flex;	margin-bottom: 25px;}
+.keyboard3 button{
+   display: block;
+   height: 35px;
+   width: 35px;
+   background-color: black;
+   color: #ffffff;
+   text-align: center;
+   margin-left: 60px;
+}
+</style>
+</head>
+<body>
+  <center>
+<section class="banner2">
+  
+<div class="numbers">
+  <input  id="search"/>
+</div>
+
+<div class="keyboard">
+<button class="num">1</button>
+<button class="num">2</button>
+<button class="num">3</button>
+<button class="num">0</button>
+</div>
+<div class="keyboard1">
+  <button class="num">4</button>
+  <button class="num">5</button>
+  <button class="num">6</button>
+ <button class="clr">clr</button> 
+</div>
+<div class="keyboard2">
+ <button class="num">7</button>
+  <button class="num">8</button>
+  <button class="num">9</button>
+  <button class="num">/</button> 
+</div>
+<div class="keyboard3">
+  <button class="num">+</button>
+  <button class="num">-</button>
+  <button class="num">*</button>
+  <button class="num">%</button> 
+</div>
+<button id="result" class="numbers-btn">See result</button>
+</section>
+</center>
+
+<script>
+    const resultButton = document.querySelector("#result");
+const searchInput = document.querySelector("#search");
+const buttons = document.querySelectorAll(".num");
+const clear = document.querySelector(".clr");
+clear.addEventListener("click", clearfun);
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", addToSearch);
+}
+
+resultButton.addEventListener("click", calculateResult);
+
+function addToSearch(event) {
+  const value = event.target.innerHTML;
+  searchInput.value += value;
+}
+
+function clearfun() {
+  searchInput.value = '';
+}
+
+
+function calculateResult() {
+    const expression = searchInput.value;
+    let result;
+  
+    if (expression.includes('+')) {
+      const [num1, num2] = expression.split('+');
+      result = parseFloat(num1) + parseFloat(num2);
+    } else if (expression.includes('-')) {
+      const [num1, num2] = expression.split('-');
+      result = parseFloat(num1) - parseFloat(num2);
+    } else if (expression.includes('*')) {
+      const [num1, num2] = expression.split('*');
+      result = parseFloat(num1) * parseFloat(num2);
+    } else if (expression.includes('/')) {
+      const [num1, num2] = expression.split('/');
+      result = parseFloat(num1) / parseFloat(num2);
+    } else if (expression.includes('%')) {
+      const [num1, num2] = expression.split('%');
+      result = (parseFloat(num1) * parseFloat(num2)) / 100;
+    }
+  
+    // Check if the result is a valid number, otherwise display an error
+    if (!isNaN(result)) {
+      searchInput.value = result;
+    } else {
+      searchInput.value ;
+    }
+  }
+</script>
+</body>
+</html>
